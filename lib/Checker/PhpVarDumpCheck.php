@@ -37,7 +37,7 @@ class PhpVarDumpCheck implements CheckerInterface
     {
         $this->log = $log;
         $this->config = $config;
-        $this->tmpDir = $config['tmpdir'] ?? '/tmp';
+        $this->tmpDir = $config['tmpdir'];
     }
 
     /**
