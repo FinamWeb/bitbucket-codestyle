@@ -64,14 +64,14 @@ class PhpVarDumpCheck implements CheckerInterface
      *
      * @throws \JakubOnderka\PhpVarDumpCheck\Exception\InvalidArgument
      */
-    private function getToolConfig(string $filePath)
+    private function getToolConfig()
     {
         $config = [0];
         if (isset($this->config['mode'])) {
             $config[] = $this->config['mode'];
         }
 
-        $settings = \JakubOnderka\PhpVarDumpCheck\Settings::parseArguments(array_merge($config, [$filePath]));
+        $settings = \JakubOnderka\PhpVarDumpCheck\Settings::parseArguments($config);
 
         if (isset($this->config['skipFunctions'])) {
             $skipFunctions = explode(',', $this->config['skipFunctions']);
@@ -102,7 +102,7 @@ class PhpVarDumpCheck implements CheckerInterface
         $result = [];
         try {
             $check = new \JakubOnderka\PhpVarDumpCheck\Manager();
-            $status = $check->checkFile($tempFile, $this->getToolConfig($tempFile));
+            $status = $check->checkFile($tempFile, $this->getToolConfig());
             foreach ($status as $item) {
                 $result[] = new CheckerResultItem($item->getLineNumber(), 'Forgotten dump found');
             }

@@ -245,9 +245,9 @@ class RequestProcessor
             }
             try {
                 $blame = $blameCollection->getBlameByLineNumber($affectedLineNumber);
+                $affectedLinesResult[] = $affectedLineNumber;
             } catch (LineNotExistException $e) {
                 $this->log->warning("Keep not checked line because can't get blame for line {$affectedLineNumber}, reason={$e->getMessage()}");
-                $affectedLinesResult[] = $affectedLineNumber;
 
                 continue;
             }
